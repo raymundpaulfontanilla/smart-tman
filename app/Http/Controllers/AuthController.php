@@ -31,7 +31,14 @@ class AuthController extends Controller
             'success' => true,
             'statusCode' => 201,
             'message' => 'Successfully registered account, you may now try to login.',
-            'user' => $user,
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'salt' => $user->salt,
+                'created_at' => $user->created_at,
+                'updated_at' => $user->updated_at,
+            ],
         ], 201);
     }
 
