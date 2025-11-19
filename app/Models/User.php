@@ -36,7 +36,6 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'password' => 'hashed',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
