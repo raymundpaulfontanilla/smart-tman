@@ -40,8 +40,6 @@ class User extends Authenticatable
         'updated_at' => 'datetime',
     ];
 
-    public $timestamps = false;
-
     protected $dateFormat = 'Y-m-d H:i:s';
 
     public function getAuthPassword()
