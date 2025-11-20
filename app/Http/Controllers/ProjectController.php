@@ -54,8 +54,8 @@ class ProjectController extends Controller
         $project = Project::create([
             'user_id' => 1,
             'name' => 'My Project 2',
-            'color' => '#000000',
-            'position' => 2
+            'color' => '#ffffff',
+            'position' => 1
         ]);
 
         return response()->json([
@@ -77,7 +77,22 @@ class ProjectController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $project = Project::find($id);
+
+        if (!$project) {
+            return response()->json([
+                'success' => false,
+                'statusCode' => 404,
+                'errorCode' => 'PROJECT_NOT_FOUND',
+                'message' => 'Project not found',
+                'project' => null
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'project' => $project
+        ]);
     }
 
     /**
