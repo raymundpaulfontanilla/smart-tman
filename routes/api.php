@@ -10,5 +10,6 @@ Route::prefix('accounts')->group(function () {
 });
 
 Route::prefix('project')->group(function () {
+    Route::get('/projects', [ProjectController::class, 'index']);
     Route::post('/create-project', [ProjectController::class, 'store']);
 });
