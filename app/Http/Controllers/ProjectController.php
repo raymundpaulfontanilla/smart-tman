@@ -31,7 +31,8 @@ class ProjectController extends Controller
             ]);
         }
 
-        $projects = Project::all();
+        $projects = Project::with('user')->get();
+
         return response()->json([
             'success' => true,
             'projects' => $projects
