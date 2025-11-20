@@ -53,9 +53,9 @@ class TaskController extends Controller
      */
     public function store()
     {
-        $project = Project::find(1);
+        $task = Project::find(1);
 
-        if (!$project) {
+        if (!$task) {
             return response()->json([
                 'success' => false,
                 'statusCode' => 404,
@@ -128,7 +128,32 @@ class TaskController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $task = Task::find($id);
+
+        if (!$task) {
+            return response()->json([
+                'success' => false,
+                'statusCode' => 404,
+                'errorCode' => 'TASK_NOT_FOUND',
+                'message' => 'Task not found',
+                'project' => null
+            ], 404);
+        }
+
+        $task->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'due_date' => $request->due_date,
+            'priority' => $request->priority,
+            'position' => $request->position,
+            'is_completed' => $request->is_completed
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Project updated successfully',
+            'project' => $task
+        ]);
     }
 
     /**
