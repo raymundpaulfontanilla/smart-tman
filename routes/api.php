@@ -20,4 +20,5 @@ Route::prefix('projects')->group(function () {
 
 Route::prefix('tasks')->group(function () {
     Route::post('/create-task', [TaskController::class, 'store']);
+    Route::get('/', [TaskController::class, 'index']);
 });
