@@ -9,7 +9,8 @@ Route::prefix('accounts')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 });
 
-Route::prefix('project')->group(function () {
-    Route::get('/projects', [ProjectController::class, 'index']);
+Route::prefix('projects')->group(function () {
+    Route::get('/', [ProjectController::class, 'index']);
     Route::post('/create-project', [ProjectController::class, 'store']);
+    Route::get('/{id}', [ProjectController::class, 'show']);
 });
