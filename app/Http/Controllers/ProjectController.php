@@ -10,9 +10,32 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->has('id')) {
+            $project = Project::find($request->id);
+
+            if (!$project) {
+                return response()->json([
+                    'success' => false,
+                    'statusCode' => 404,
+                    'errorCode' => 'PROJECT_NOT_FOUND',
+                    'message' => 'Project not found',
+                    'project' => null
+                ], 404);
+            }
+
+            return response()->json([
+                'success' => true,
+                'project' => $project
+            ]);
+        }
+
+        $projects = Project::all();
+        return response()->json([
+            'success' => true,
+            'projects' => $projects
+        ]);
     }
 
     /**
