@@ -11,9 +11,33 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->has('id')) {
+            $task = Task::find($request->id);
+
+            if (!$task) {
+                return response()->json([
+                    'success' => false,
+                    'statusCode' => 404,
+                    'errorCode' => 'PROJECT_NOT_FOUND',
+                    'message' => 'Project not found',
+                    'project' => null
+                ], 404);
+            }
+
+            return response()->json([
+                'success' => true,
+                'project' => $task
+            ]);
+        }
+
+        $tasks = Task::with('project')->get();
+
+        return response()->json([
+            'success' => true,
+            'projects' => $tasks
+        ]);
     }
 
     /**
